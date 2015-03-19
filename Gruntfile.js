@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     bower: {
       install: {
         options: {
-          targetDir: 'ex4_grunt/vendor/bower_components',
+          targetDir: 'vendor/',
           layout: 'byComponent',
           verbose: true,
           cleanup: true
@@ -17,20 +17,35 @@ module.exports = function(grunt) {
       }
     },
     browserify: {
-      app: {
+      ex4: {
         files: {
           'ex4_grunt/bundle.js': [
             'ex4_grunt/main.js'
           ],
         },
         options: {
-          transform: ['hbsfy']
+          transform: [
+            'hbsfy',
+            'browserify-shim'
+          ]
+        }
+      },
+      ex5: {
+        files: {
+          'ex5_bower/bundle.js': [
+            'ex5_bower/main.js'
+          ],
+        },
+        options: {
+          transform: [
+            'hbsfy',
+            'browserify-shim'
+          ]
         }
       }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-bower-task');
 

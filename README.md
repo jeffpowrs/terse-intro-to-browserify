@@ -23,9 +23,10 @@ magic.do();
 ```
 ## Why use Browserify?
 
-* _Easy_ dependency managment in your client-side application.
-* You can write Modular, Decoupled Code.
-* Some other cool things!
+* It makes dependency managment in your client-side application _easy_.
+* Having this easy approach to dependency managment will lead to more _modular_, _decoupled_ Code.
+* You can share modules between the client-side and server-side application.
+* Some other cool things.
 
 ## Let's get into it.
 
@@ -38,21 +39,23 @@ _This requires node.js and npm._
 
 `browserify main.js -o bundle.js`
 
-This command will bundle main.js, and all it's required modules into a single javascript file that can be included in your application.
+This command will recursively bundle main.js, and all of it's required modules into a single javascript file that can be included in your application.
 
-Now let's run `npm install` to install the modules we will be using in our demos.
+Now run `npm install` to install the modules we will be using in our demos.
 
 ## Trying some examples.
 
 ### Example One
 
-`cd ./ex1_underscore`
+Here we will use the `util` Node-core module as well as the underscore.js node package, so make sure you have underscore installed.
 
-`browserify main.js -o bundle.js`
+`% npm install underscore -g`
 
-`open index.html`
+`% cd ./ex1_underscore`
 
-Now open `ex1_underscore/index.html` in your browser.
+`% browserify main.js -o bundle.js`
+
+Now open `ex1_underscore/index.html` in your browser, `% open index.html`.
 
 You should see **some number** displayed in Green.
 
@@ -62,40 +65,69 @@ _PRETTY COOL! HUH?_
 
 ## Source Transforms
 
-A transform is an additional process that is run while your files are being compilied. Each `required` file that browserify encounters during compilation will be _transformed_, if applicable, before compilation continues.
+A transform is an additional process that is run on the modules that you `require()`. Each `requir()`ed file that browserify encounters during compilation will be _transformed_, if applicable, before the are added to the bundled javascript.
 
 [List of transforms](https://github.com/substack/node-browserify/wiki/list-of-transforms)
 
-Browserify allows you easily [write your own transforms.](https://github.com/substack/browserify-handbook#transforms)
+Or you can also [write your own transforms.](https://github.com/substack/browserify-handbook#transforms)
 
 ### Example 2
 
 In this example we will use the [hbsfy](https://github.com/epeli/node-hbsfy) transform. This will allow use to precompile our handlebars templates simply by requiring them in our source code.
 
-`cd ./ex1_underscore`
+`% cd ./ex2_hbsfy`
 
-`browserify main.js -o bundle.js`
+`% browserify main.js -o bundle.js`
 
-`open index.html`
+Now open `ex2_hbsfy/index.html` in your browser, `% open index.html`.
 
-As you can see in `main.js` the only change from example one is that we are now requiring a handlebars template, which is precomplied automatically using our handy-dandy `hsbfy` transform.
+If we look in `main.js`, we can see that the only change from example one is that we are now `require()`ing a handlebars template, which is precomplied (`Handlebars.precompile()`ed) automatically using our _handy-dandy_ `hsbfy` transform.
 
-Our transforms is defined in `package.json`.
+Our transforms are defined in `package.json`.
+
+_WOW, REALLY COOL!_
 
 ## Shimming
 
-Browserify can convert packages that are not written in commonjs export format into requirable modules.
+Browserify can convert packages that do not follow the commonJs export format into requirable modules. To do this you we use Browserify's shim feature.
 
 ### Example Three
-https://gist.github.com/defunctzombie/4339901
+
+Here we will shim the jQuery library so that we can use retrieve it using a `require()` statement.
+
+`% cd ./ex3_shim`
+
+`% browserify main.js -o bundle.js`
+
+Now open `ex3_shim/index.html` in your browser, `% open index.html`.
 
 ## Grunt
 
+Let's integrate our `Browserify` build process into our Grunt workflow.
+
+We can do this by using [grunt-broserify](https://github.com/jmreidy/grunt-browserify)
+
 ### Example Four
 
+First we need to remove the transforms from our `package.json`. Otherwise our transforms will double up and we won't be able to use our templates.
 
-## Browserify In Your Grunt Workflow
+Now lets compile our javascript with our new grunt task.
+
+`% cd ./ex4_grunt`
+
+`% grunt browserify:app`
+
+Now open `ex3_shim/index.html` in your browser, `% open index.html`.
+
+We can see that our code continues to work.
+
+_AIN'T THAT SOMETHING!_
+
+
 
 ## Where to go from here.
 
-[Additional Reading] (http://browserify.org/articles.html)
+Checkout some [Browserify Articles] (http://browserify.org/articles.html)
+Read the [Browserify Handbook] (https://github.com/substack/browserify-handbook)
+Try out [B.E.N.M. Boilerplate] (https://github.com/jkat98/benm)
+Contribute to my [B.C.S.M. Boilerplate] (https://github.com/jeffpowrs/bcsm)

@@ -12,7 +12,7 @@ var body = document.body;
 
 var result = tmpl({'sum': sum});
 
-body.insertAdjacentHTML("beforebegin",result);
+body.insertAdjacentHTML("beforebegin", result);
 
 },{"./template.hbs":2,"underscore":11}],2:[function(require,module,exports){
 // hbsfy compiled Handlebars template
