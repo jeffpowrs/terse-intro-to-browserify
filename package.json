@@ -1,0 +1,29 @@
+{
+  "title": "A Terse Introduction to Browserify",
+  "description": "A terse introduction to Browserify with examples.",
+  "author": "Jeff Powers <hello@jeffpow.rs>",
+  "private": true,
+  "dependencies": {
+    "underscore": "~1.8.2"
+  },
+  "devDependencies": {
+    "handlebars": "~2.0.0",
+    "hbsfy": "~2.2.1",
+    "browserify-shim": "~3.8.3",
+    "grunt-browserify": "~3.5.0",
+    "grunt-bower-task": "~0.4.0"
+  },
+  "engine": "node >= 0.4.1",
+  "browserify": {
+    "transform": [ 
+      "hbsfy",
+      "browserify-shim"
+    ]
+  },
+  "browser": {
+    "jquery": "./jquery-2.1.3.min.js"
+  },
+  "browserify-shim": {
+    "jquery": "$"
+  }
+}

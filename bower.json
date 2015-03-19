@@ -1,0 +1,11 @@
+{
+  "name": "A Terse Introduction to Browserify",
+  "private": true,
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "countUp.js": "~1.3.2"
+  }
+}
